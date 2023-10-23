@@ -12,7 +12,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 
-export default function LoginForm() {
+export default function Register() {
   const formBackground = useColorModeValue("gray.100", "gray.700");
   const { toggleColorMode } = useColorMode();
 
