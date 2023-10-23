@@ -4,12 +4,13 @@ import {
   Flex,
   Heading,
   Input,
+  Link,
   Switch,
   useColorMode,
   useColorModeValue,
 } from "@chakra-ui/react";
 
-export default function LoginForm() {
+export default function Register() {
   const formBackground = useColorModeValue("gray.100", "gray.700");
   const { toggleColorMode } = useColorMode();
   return (
@@ -32,6 +33,9 @@ export default function LoginForm() {
           type="password"
         />
         <Button colorScheme="teal">Login</Button>
+        <Box textAlign="center" mt={5} color="gray.500">
+          <Link href="/register">Create an account</Link>
+        </Box>
       </Flex>
     </Flex>
   );
