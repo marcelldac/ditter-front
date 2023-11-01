@@ -9,10 +9,12 @@ import {
   useColorMode,
   useColorModeValue,
 } from "@chakra-ui/react";
+import React from "react";
 
-export default function Register() {
+export default function LoginForm() {
   const formBackground = useColorModeValue("gray.100", "gray.700");
   const { toggleColorMode } = useColorMode();
+
   return (
     <Flex height="100vh" alignItems="center" justifyContent="center">
       <Flex direction="column" background={formBackground} p={12} rounded={6}>
