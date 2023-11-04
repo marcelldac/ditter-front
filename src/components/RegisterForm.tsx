@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { useFormik } from "formik";
 import { Flex, Checkbox, Text, Button, Link, Input } from "@chakra-ui/react";
 
-import api from "../api/api";
+import api from "@/api/api";
 
 async function registerUser(email: string, password: string) {
   const response = await api.post("/users", {
