@@ -1,18 +1,41 @@
 import React from "react";
 import { useFormik } from "formik";
-import { Flex, Checkbox, Text, Button, Link, Input } from "@chakra-ui/react";
+import {
+  Flex,
+  Checkbox,
+  Text,
+  Button,
+  Link,
+  Input,
+  useToast,
+} from "@chakra-ui/react";
 
 import api from "@/api/api";
 
-async function registerUser(email: string, password: string) {
-  const response = await api.post("/users", {
-    email,
-    password,
-  });
-  console.log(response);
-}
-
 function RegisterForm() {
+  const toast = useToast();
+
+  async function registerUser(email: string, password: string) {
+    try {
+      const response = await api.post("/users", {
+        email,
+        password,
+      });
+      console.log(response);
+      if (response.status == 201) {
+        toast({
+          title: "Account created.",
+          description: "We've created your account for you.",
+          status: "success",
+          duration: 9000,
+          isClosable: true,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -54,7 +77,8 @@ function RegisterForm() {
       />
       <Flex direction="row" color="gray.500" my={8}>
         <Checkbox size="md" colorScheme="teal" />
-        <Text ml={2}>I agree to sell my privacy</Text>
+        {/* TODO: Criar uma rota para linkar o termos e condições aqui (para o usuário clicar) */}
+        <Text ml={2}>I accept the Terms and Conditions</Text>
       </Flex>
       <Flex
         mt={5}
