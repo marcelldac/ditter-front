@@ -10,7 +10,7 @@ import {
   useToast,
 } from "@chakra-ui/react";
 
-import api from "@/api/api";
+import { api } from "@/services/api";
 
 function RegisterForm() {
   const toast = useToast();
