@@ -1,7 +1,8 @@
 import "@/styles/globals.css";
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
-import { SessionProvider } from "next-auth/react";
 import type { AppProps } from "next/app";
+
+import { AuthProvider } from "../contexts/AuthContext";
 
 const colors = {
   brand: {
@@ -18,10 +19,10 @@ export default function App({
   pageProps: { session, ...pageProps },
 }: AppProps) {
   return (
-    <SessionProvider session={session}>
-      <ChakraProvider theme={theme}>
+    <ChakraProvider theme={theme}>
+      <AuthProvider>
         <Component {...pageProps} />
-      </ChakraProvider>
-    </SessionProvider>
+      </AuthProvider>
+    </ChakraProvider>
   );
 }
