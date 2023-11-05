@@ -1,3 +1,5 @@
+import { useContext } from "react";
+import { AuthContext } from "@/contexts/AuthContext";
 import {
   Box,
   Button,
@@ -10,10 +12,17 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import React from "react";
+import { useForm } from "react-hook-form";
 
 export default function LoginForm() {
   const formBackground = useColorModeValue("gray.100", "gray.700");
   const { toggleColorMode } = useColorMode();
+  const { register, handleSubmit } = useForm();
+  const { signIn } = useContext(AuthContext);
+
+  async function handleSignIn(data: any) {
+    await signIn(data);
+  }
 
   return (
     <Flex height="100vh" alignItems="center" justifyContent="center">
@@ -22,22 +31,30 @@ export default function LoginForm() {
           <Switch onChange={toggleColorMode} />
         </Box>
         <Heading mb={6}>Login</Heading>
-        <Input
-          placeholder="johndoe@email.com"
-          variant="filled"
-          mb={3}
-          type="email"
-        />
-        <Input
-          placeholder="*************"
-          variant="filled"
-          mb={6}
-          type="password"
-        />
-        <Button colorScheme="teal">Login</Button>
-        <Box textAlign="center" mt={5} color="gray.500">
-          <Link href="/register">Create an account</Link>
-        </Box>
+        <form onSubmit={handleSubmit(handleSignIn)}>
+          <Input
+            {...register("email")}
+            name="email"
+            placeholder="johndoe@email.com"
+            variant="filled"
+            mb={3}
+            type="email"
+          />
+          <Input
+            {...register("password")}
+            name="password"
+            placeholder="*************"
+            variant="filled"
+            mb={6}
+            type="password"
+          />
+          <Button type="submit" colorScheme="teal">
+            Login
+          </Button>
+          <Box textAlign="center" mt={5} color="gray.500">
+            <Link href="/register">Create an account</Link>
+          </Box>
+        </form>
       </Flex>
     </Flex>
   );
