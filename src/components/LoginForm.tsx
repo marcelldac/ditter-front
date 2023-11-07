@@ -1,5 +1,5 @@
-import { useContext } from "react";
-import { AuthContext } from "@/contexts/AuthContext";
+import { useState, useEffect, useContext } from "react";
+import { useForm } from "react-hook-form";
 import {
   Box,
   Button,
@@ -11,8 +11,9 @@ import {
   useColorMode,
   useColorModeValue,
 } from "@chakra-ui/react";
-import React from "react";
-import { useForm } from "react-hook-form";
+
+import { api } from "@/services/api";
+import { AuthContext } from "@/contexts/AuthContext";
 
 export default function LoginForm() {
   const formBackground = useColorModeValue("gray.100", "gray.700");
@@ -20,9 +21,20 @@ export default function LoginForm() {
   const { register, handleSubmit } = useForm();
   const { signIn } = useContext(AuthContext);
 
+  const [users, setUsers] = useState<any[]>([]);
+
+  async function getUsers(): Promise<void> {
+    const { data } = await api.get("/users");
+    setUsers(data);
+  }
+
   async function handleSignIn(data: any) {
     await signIn(data);
   }
+
+  useEffect(() => {
+    getUsers();
+  }, []);
 
   return (
     <Flex height="100vh" alignItems="center" justifyContent="center">
