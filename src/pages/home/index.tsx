@@ -7,11 +7,11 @@ import { api } from "@/services/api";
 import { getAPIClient } from "@/services/axios";
 
 export default function Home() {
-  const { user } = useContext(AuthContext);
+  /* const { user } = useContext(AuthContext); */
 
-  useEffect(() => {
+  /* useEffect(() => {
     api.get("/users");
-  }, []);
+  }, []); */
 
   return (
     <>
@@ -23,7 +23,7 @@ export default function Home() {
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
+/* export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const apiClient = getAPIClient(ctx);
   const { ["nextauth.token"]: token } = parseCookies(ctx);
 
@@ -41,4 +41,4 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   return {
     props: {},
   };
-};
+}; */
