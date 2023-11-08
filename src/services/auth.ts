@@ -1,4 +1,4 @@
-import { v4 as uuid } from "uuid";
+/* import { v4 as uuid } from "uuid";
 
 type SignInRequestData = {
   email: string;
@@ -29,3 +29,4 @@ export async function recoverUserInformation() {
     },
   };
 }
+ */
