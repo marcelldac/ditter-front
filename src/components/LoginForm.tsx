@@ -43,7 +43,14 @@ export default function LoginForm() {
           <Switch onChange={toggleColorMode} />
         </Box>
         <Heading mb={6}>Login</Heading>
-        <form onSubmit={() => {} /* handleSubmit(handleSignIn) */}>
+        <form
+          method="post"
+          onSubmit={(e) => {
+            e.preventDefault();
+            console.log("ok");
+            /* handleSubmit(handleSignIn) */
+          }}
+        >
           <Input
             {...register("email")}
             name="email"
