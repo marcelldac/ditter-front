@@ -13,13 +13,13 @@ import {
 } from "@chakra-ui/react";
 
 import { api } from "@/services/api";
-import { AuthContext } from "@/contexts/AuthContext";
+/* import { AuthContext } from "@/contexts/AuthContext"; */
 
 export default function LoginForm() {
   const formBackground = useColorModeValue("gray.100", "gray.700");
   const { toggleColorMode } = useColorMode();
   const { register, handleSubmit } = useForm();
-  const { signIn } = useContext(AuthContext);
+  /* const { signIn } = useContext(AuthContext); */
 
   const [users, setUsers] = useState<any[]>([]);
 
@@ -28,9 +28,9 @@ export default function LoginForm() {
     setUsers(data);
   }
 
-  async function handleSignIn(data: any) {
+  /* async function handleSignIn(data: any) {
     await signIn(data);
-  }
+  } */
 
   useEffect(() => {
     getUsers();
@@ -43,7 +43,7 @@ export default function LoginForm() {
           <Switch onChange={toggleColorMode} />
         </Box>
         <Heading mb={6}>Login</Heading>
-        <form onSubmit={handleSubmit(handleSignIn)}>
+        <form onSubmit={() => {} /* handleSubmit(handleSignIn) */}>
           <Input
             {...register("email")}
             name="email"
