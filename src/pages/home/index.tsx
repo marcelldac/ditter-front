@@ -2,7 +2,7 @@ import { GetServerSideProps } from "next";
 import Head from "next/head";
 import { useContext, useEffect } from "react";
 import { parseCookies } from "nookies";
-import { AuthContext } from "@/contexts/AuthContext";
+/* import { AuthContext } from "@/contexts/AuthContext"; */
 import { api } from "@/services/api";
 import { getAPIClient } from "@/services/axios";
 
