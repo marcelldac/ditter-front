@@ -47,7 +47,7 @@ function RegisterForm() {
   });
 
   return (
-    <form onSubmit={formik.handleSubmit}>
+    <form method="post" onSubmit={formik.handleSubmit}>
       <Input
         placeholder="Your e-mail"
         variant="filled"
