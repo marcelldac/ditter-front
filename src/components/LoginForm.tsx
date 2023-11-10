@@ -1,5 +1,4 @@
-import { useState, useEffect, useContext } from "react";
-import { useForm } from "react-hook-form";
+import { useEffect } from "react";
 import {
   Box,
   Button,
@@ -12,29 +11,9 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 
-import { api } from "@/services/api";
-/* import { AuthContext } from "@/contexts/AuthContext"; */
-
 export default function LoginForm() {
   const formBackground = useColorModeValue("gray.100", "gray.700");
   const { toggleColorMode } = useColorMode();
-  const { register, handleSubmit } = useForm();
-  /* const { signIn } = useContext(AuthContext); */
-
-  const [users, setUsers] = useState<any[]>([]);
-
-  async function getUsers(): Promise<void> {
-    const { data } = await api.get("/users");
-    setUsers(data);
-  }
-
-  /* async function handleSignIn(data: any) {
-    await signIn(data);
-  } */
-
-  useEffect(() => {
-    getUsers();
-  }, []);
 
   return (
     <Flex height="100vh" alignItems="center" justifyContent="center">
@@ -44,15 +23,12 @@ export default function LoginForm() {
         </Box>
         <Heading mb={6}>Login</Heading>
         <form
-          method="post"
           onSubmit={(e) => {
             e.preventDefault();
             console.log("ok");
-            /* handleSubmit(handleSignIn) */
           }}
         >
           <Input
-            {...register("email")}
             name="email"
             placeholder="johndoe@email.com"
             variant="filled"
@@ -60,7 +36,6 @@ export default function LoginForm() {
             type="email"
           />
           <Input
-            {...register("password")}
             name="password"
             placeholder="*************"
             variant="filled"
