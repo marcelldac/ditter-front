@@ -1,3 +1,4 @@
+import { api } from "@/services/api";
 import {
   Box,
   Button,
@@ -9,10 +10,36 @@ import {
   useColorMode,
   useColorModeValue,
 } from "@chakra-ui/react";
+import { useRouter } from "next/navigation";
+import { useForm, SubmitHandler } from "react-hook-form";
+
+type UserLogin = {
+  email: string;
+  password: string;
+};
 
 export default function LoginForm() {
   const formBackground = useColorModeValue("gray.100", "gray.700");
   const { toggleColorMode } = useColorMode();
+  const { handleSubmit, register } = useForm<UserLogin>();
+  const { push } = useRouter();
+
+  const onSubmit: SubmitHandler<UserLogin> = (data) => {
+    loginUser(data.email, data.password);
+  };
+
+  async function loginUser(email: string, password: string) {
+    const response = await api.post("/authorization", {
+      email,
+      password,
+    });
+
+    if (response.status == 201) {
+      console.log(response.data.token);
+      return push("/home");
+    }
+    return alert("User does not exist");
+  }
 
   return (
     <Flex height="100vh" alignItems="center" justifyContent="center">
@@ -21,13 +48,9 @@ export default function LoginForm() {
           <Switch onChange={toggleColorMode} />
         </Box>
         <Heading mb={6}>Login</Heading>
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            console.log("ok");
-          }}
-        >
+        <form onSubmit={handleSubmit(onSubmit)}>
           <Input
+            {...register("email", { required: true })}
             name="email"
             placeholder="johndoe@email.com"
             variant="filled"
@@ -35,6 +58,7 @@ export default function LoginForm() {
             type="email"
           />
           <Input
+            {...register("password", { required: true })}
             name="password"
             placeholder="*************"
             variant="filled"
